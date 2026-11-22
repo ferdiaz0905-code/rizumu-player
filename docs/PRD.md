@@ -1,4 +1,4 @@
-# PRD · <Nombre de tu producto>
+# PRD · <Rizumu Player>
 
 > Documento de requisitos del producto (Product Requirements Document).
 > Complétalo en el Sprint 0 (historia H0.3) y pide la aprobación del profesor en un Issue.
@@ -6,32 +6,34 @@
 
 | Campo | Valor |
 | --- | --- |
-| Alumno | |
-| Proyecto n.º | |
-| Sitio de referencia | |
-| Compañero revisor | |
+| Alumno |María Díaz|
+| Proyecto n.º |25|
+| Sitio de referencia |Spotify|
+| Compañero revisor |Julio Amundaray|
 | URL desplegada | (se completa en el Sprint 5) |
 
 ## 1. Problema
 
-¿Qué problema real resuelve y a quién le duele? (3 a 5 líneas)
+Ofrece a los usuarios una experiencia fluida sin publicidad, en una interfaz web sencilla y ordenada donde se pueden armar listas de reproduccón, avanzar, retroceder y mezclar aleatoriamente las canciones con teclas multimedia.
 
 ## 2. Usuarios
 
-- **Usuario principal:** quién es, qué necesita, desde qué dispositivo entra.
-- **Usuario secundario:**
+- **Usuario principal:** Oyente que busca canciones y necesita una experiencia sin interrupciones de publicidad, controlando la reproducción desde el navegador.
+- **Usuario secundario:** Administrador del catálogo musical que carga o modera canciones, artistas y álbumes.
 
 ## 3. Objetivo y métrica de éxito
 
-Ejemplo: «Un bodeguero registra una venta en menos de 10 segundos».
+Un usuario busca y encuentra una canción, la puede agregar a una lista de reproducción y comienza a escucharla en menos de 5 segundos.
 
 ## 4. Alcance del MVP
 
 Entre 5 y 8 funcionalidades que SÍ entran este semestre.
 
-1.
-2.
-3.
+1.Reproducir archivos de audio
+2.Buscar canciones por nombre, artista o álbumes
+3.Crear listas de reproducción.
+4.Reproducción aleatoria de canciones.
+5.Controlar reproduccion.
 
 ### Funcionalidades → carpetas de `src/` (screaming architecture)
 
@@ -39,21 +41,27 @@ Cada funcionalidad del alcance será una carpeta en `src/`. Nómbralas en inglé
 
 | Funcionalidad | Carpeta |
 | --- | --- |
-| Ejemplo: ventas | `src/sales` |
+| Catálogo de canciones | `src/songs` |
+| Artistas y álbumes | `src/artist` |
+| Listas de reproducción | `src/playlist` |
+| Reproductor y cola | `src/player` |
 | | |
 
 ## 5. Fuera de alcance
 
 Lo que NO vas a construir.
 
--
+- Suscripciones, descarga de música, letras sincronizadas en tiempo real,
 
 ## 6. Requisitos funcionales
 
 | ID | Requisito | Prioridad (alta, media, baja) |
 | --- | --- | --- |
-| RF-01 | | |
-| RF-02 | | |
+| RF-01 | Listar, buscar y filtrar canciones por título, artista o género| alta|
+| RF-02 | Crear, editar y eliminar listas de reproducción y agregar o quitar canciones| alta|
+| RF-03 | Gestionar la cola de reproducción mediante una lista doblemente enlazada | alta |
+| RF-04 | Activar modo aleatorio (shuffle) usando el algoritmo Fisher-Yates sin repetir pistas hasta completar el ciclo | alta |
+| RF-05 | Controlar reproducción (Play/Pause, Siguiente, Anterior, Silencio) mediante teclas multimedia del sistema y atajos de teclado | alta |
 
 ## 7. Requisitos no funcionales
 
@@ -69,24 +77,70 @@ GitHub dibuja diagramas Mermaid; edita este ejemplo:
 
 ```mermaid
 erDiagram
-  CLIENTE ||--o{ PEDIDO : hace
-  PEDIDO ||--|{ LINEA_PEDIDO : contiene
-  PRODUCTO ||--o{ LINEA_PEDIDO : aparece_en
-  CLIENTE {
+  USER ||--o{ PLAY_HISTORY : escucha
+  ARTIST ||--o{ ALBUM : publica
+  ARTIST ||--o{ SONG : interpreta
+  ALBUM ||--o{ SONG : contiene
+  PLAYLIST ||--|{ PLAYLIST_SONG : incluye
+  SONG ||--o{ PLAYLIST_SONG : aparece_en
+  SONG ||--o{ PLAY_HISTORY : registrada_en
+
+
+
+  ARTIST {
     int id PK
-    text nombre
-    text telefono
+    text name
+    text genre
+    text country
+    timestamptz created_at
   }
-  PEDIDO {
+
+  ALBUM {
     int id PK
-    int cliente_id FK
-    timestamptz creado_en
+    int artist_id FK
+    text title
+    int release_year
+    text cover_url
+  }
+
+  SONG {
+    int id PK
+    int artist_id FK
+    int album_id FK
+    text title
+    int duration_seconds
+    text audio_url
+    int play_count
+    timestamptz created_at
+  }
+
+  PLAYLIST {
+    int id PK
+    int user_id FK
+    text name
+    text description
+    boolean is_public
+    timestamptz created_at
+  }
+
+  PLAYLIST_SONG {
+    int playlist_id PK, FK
+    int song_id PK, FK
+    int position
+    timestamptz added_at
+  }
+
+  PLAY_HISTORY {
+    int id PK
+    int user_id FK
+    int song_id FK
+    timestamptz played_at
   }
 ```
 
 ## 9. Reto técnico distintivo
 
-El que te tocó en el catálogo y cómo piensas resolverlo.
+Cola con lista doble permitiendo navegar hacia adelante y atras en la cola de reproduccion, mezcla Fisher-Yates garantizando permutaciones uniformes y teclas multimedia que permiten la interaccion del usuario con el reproductor web.
 
 ## 10. Riesgos y preguntas abiertas
 
