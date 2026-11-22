@@ -1,7 +1,7 @@
 {
-  "name": "mi-producto",
+  "name": "rizumu-player",
   "version": "0.1.0",
-  "description": "Proyecto de Lenguaje de Programación · cambia este texto por la descripción de tu producto",
+  "description": "Reproductor de música enfocado en una experiencia fluida sin interrupciones, reproducción aleatoria y teclas multimedia en una interfaz minimalista.",
   "private": true,
   "type": "module",
   "engines": {
