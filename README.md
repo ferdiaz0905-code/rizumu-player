@@ -1,7 +1,7 @@
-# Mi producto
+# Rizumu Player
 
-> **Alumno:** cambia este título por el nombre de tu producto y esta línea por una frase que lo explique.
-> Proyecto n.º __ del catálogo · Sitio de referencia: __ · [PRD](docs/PRD.md) · URL publicada: __
+> Reproductor de música enfocado en una experiencia fluida sin interrupciones, reproducción aleatoria y teclas multimedia en una interfaz minimalista.
+> Proyecto n.º 25 del catálogo · Sitio de referencia: Spotify · [PRD](docs/PRD.md) · URL publicada: pendiente (Sprint 5)
 
 Plantilla del proyecto de **Lenguaje de Programación · 2026**.
 La guía completa de la actividad está en el repositorio del curso:
