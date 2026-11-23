@@ -2,6 +2,7 @@
 
 > Reproductor de música enfocado en una experiencia fluida sin interrupciones, reproducción aleatoria y teclas multimedia en una interfaz minimalista.
 > Proyecto n.º 25 del catálogo · Sitio de referencia: Spotify · [PRD](docs/PRD.md) · URL publicada: pendiente (Sprint 5)
+>**Certificado H0.1:** [Curso de Programación Básica — Platzi](https://platzi.com/p/ferdiaz0905/curso/13100-course/diploma/detalle/) 
 
 Plantilla del proyecto de **Lenguaje de Programación · 2026**.
 La guía completa de la actividad está en el repositorio del curso:
